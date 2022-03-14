@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar as NativeStatusBar, StyleSheet, View } from "react-native";
+import { store } from "./store";
+import { Provider } from "react-redux";
+
+import ToDoList from "./components/todo/ToDoList";
+import ToDoInput from "./components/todo/ToDoInput";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<Provider store={store}>
+			<View style={styles.container}>
+				<NativeStatusBar backgroundColor="indigo" StatusBarStyle="auto" />
+				<View style={styles.todos}>
+					<ToDoList />
+				</View>
+				<ToDoInput />
+			</View>
+		</Provider>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		flexDirection: "column",
+	},
+	todos: {
+		flex: 1,
+	},
 });
